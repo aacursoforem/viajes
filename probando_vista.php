@@ -6,8 +6,10 @@
 </head>
 <body>
 <?php
-// Conectamos a la base de datos. En caso de error salimos
-	$conexion = mysqli_connect('localhost', 'root', '', 'viajes') OR die ("No se puedo realizar la conexión a la base de datos");
+// Incluimos el fichero funciones.php (contiene la función conectaBD
+	require("funciones.php");
+// Conectamos a la base de datos	
+	$conexion = conectaBD();
 	
 // Si es la primera vez que llamamos al script del formulario, no hay datos en $_POST['id_destino'] por lo
 // que procedemos a mostrar el formulario para que el usuario elija el destino
@@ -34,7 +36,7 @@ if (!isset($_POST['id_destino'])) {
 	// select (destino) seleccionada por el usuario
 	$id_destino = $_POST['id_destino'];
 	// Usamos la vista creada en la base de datos a la que añadimos la condicion del destino seleccionado por el usuario
-	$sql2 = "SELECT * FROM todoViajes WHERE id_destino=$id_destino";
+	$sql2 = "SELECT * FROM todoviajes WHERE id_destino=$id_destino";
 	//echo'<p>Contenido de la consulta</p>'; echo $sql2; echo'<br/>';
 	
 	// devuelve los campos precio, id, lugar, zona

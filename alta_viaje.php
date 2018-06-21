@@ -11,8 +11,12 @@
 // Tomamos los datos que nos envían desde el formulario a través del método POST	
 	$id_destino = $_POST['id_destino'];
 	$precio = $_POST['precio'];
+
+// Incluimos el fichero funciones.php (contiene la función conectaBD
+	require("funciones.php");
 // Conectamos a la base de datos	
-	$conexion = mysqli_connect('localhost', 'root', '', 'viajes') OR die ("No se puedo realizar la conexión a la base de datos");
+	$conexion = conectaBD();
+
 // Preparamos la consulta para insertar los datos del formulario en la base de datos	
 	$sql = "INSERT INTO viajes (id_destino, precio) VALUES ($id_destino, $precio)";
 	//echo'<p>Contenido de la consulta</p>';	echo $sql;

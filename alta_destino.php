@@ -9,13 +9,16 @@
 <?php
 // Mostramos los datos que recibimos a través de post
 	//echo'<pre>'; print_r($_POST); echo'</pre>';
+
 	
 // Recogemos los datos que nos pasan por POST	
 	$lugar = $_POST['lugar'];
 	$continente = $_POST['continente'];
-	
+
+// Incluimos el fichero funciones.php (contiene la función conectaBD
+	require("funciones.php");	
 // Conectamos a la base de datos	
-	$conexion = mysqli_connect('localhost', 'root', '', 'viajes') OR die ("No se puedo realizar la conexión a la base de datos");
+	$conexion = conectaBD();
 	
 // Preparamos la consulta a ejecutar (llamada a un procedimiento predefinido en la base de datos)
 	$sql = "CALL recogeDestino('$lugar', '$continente')";

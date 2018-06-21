@@ -11,8 +11,11 @@
 		<select id="id_destino" name="id_destino">
 		
 <?php
-// Conectamos a la base de datos
-	$conexion = mysqli_connect('localhost', 'root', '', 'viajes') OR die ("No se puedo realizar la conexión a la base de datos");
+// Incluimos el fichero funciones.php (contiene la función conectaBD
+	require("funciones.php");
+// Conectamos a la base de datos	
+	$conexion = conectaBD();
+
 	// Preparamos una consulta que devuelva todos los datos de destino (id y lugar)
 	$sql = "SELECT id, lugar FROM destinos";
 	$destinos = mysqli_query($conexion, $sql) OR die ("Error recuperando destinos".mysqli_error($conexion));

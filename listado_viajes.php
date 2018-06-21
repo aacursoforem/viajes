@@ -7,8 +7,10 @@
 <body>
 <h2>Listado de viajes</h2>
 <?php
-// // Conectamos a la base de datos
-	$conexion = mysqli_connect("localhost", "root", "", "viajes");
+// Incluimos el fichero funciones.php (contiene la función conectaBD
+	require("funciones.php");
+// Conectamos a la base de datos	
+	$conexion = conectaBD();
 	
 // Preparamos la consulta a la base de datos. Usamos la función definida en la BD tipoViaje que en función 
 // del precio indica el tipo de viaje (Normal, Bussness, VIP)

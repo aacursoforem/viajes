@@ -16,7 +16,7 @@
 if (!isset($_POST['id_destino'])) {
 ?>
 	<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-		<label for="id_destino">Destinos</label>
+		<label for="id_destino">Destino</label>
 		<select id="id_destino" name="id_destino">
 		
 <?php
@@ -42,19 +42,24 @@ if (!isset($_POST['id_destino'])) {
 	// devuelve los campos precio, id, lugar, zona
 	
 	$registros = mysqli_query($conexion, $sql2) OR DIE ("Error probando la vista".mysqli_error($conexion));
-	// Inicialmente no se publica el título
-	$tituloPublicado = false;
-	while ($reg = mysqli_fetch_assoc($registros)) {
-		// Si el título no se ha publicado lo publicamos e indicamos que ya está publicado para próximas pasadas
-		if (!$tituloPublicado) {  		
-			echo'<h3>Viajes con destino a '.$reg['lugar'].'</h3>';
-			$tituloPublicado = true;
+	$num_registros = mysqli_num_rows($registros);
+	if ($num_registros > 0) {
+		// Inicialmente no se publica el título
+		$tituloPublicado = false;
+		while ($reg = mysqli_fetch_assoc($registros)) {
+			// Si el título no se ha publicado lo publicamos e indicamos que ya está publicado para próximas pasadas
+			if (!$tituloPublicado) {  		
+				echo'<h3>Viajes con destino a '.$reg['lugar'].'</h3>';
+				$tituloPublicado = true;
+			}
+			//echo"Identificador: ".$reg['id']."<br/>";
+			echo"Precio: ".$reg['precio']."<br/>";
+			//echo"Tipo de viaje: ".$reg['tipo']."<br/>";
+			echo"Zona de viaje: ".$reg['zona']."<br/>";
+			echo "<hr/>";		
 		}
-		//echo"Identificador: ".$reg['id']."<br/>";
-		echo"Precio: ".$reg['precio']."<br/>";
-		//echo"Tipo de viaje: ".$reg['tipo']."<br/>";
-		echo"Zona de viaje: ".$reg['zona']."<br/>";
-		echo "<hr/>";		
+	} else {
+		echo'<p>No existen viajes para este destino</p>';
 	}
 }	// fin else
 	mysqli_close($conexion);
